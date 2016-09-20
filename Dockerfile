@@ -15,9 +15,9 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     && ln -s /usr/bin/python2.7 /usr/local/bin/python
 
 ADD ./bootstrap.sh /etc/my_init.d/
-COPY ./package.json ~/package.json
+COPY ./package.json /root/package.json
 WORKDIR /home/app/webapp
-RUN npm install -g pm2 sails && npm install --prefix ~/
+RUN npm install -g pm2 sails && npm install --prefix /root/
 RUN mkdir /etc/service/app
 ADD ./app.sh /etc/service/app/run
 RUN chmod +x /etc/my_init.d/bootstrap.sh && chmod +x /etc/service/app/run
