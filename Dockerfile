@@ -17,7 +17,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
 ADD ./bootstrap.sh /etc/my_init.d/
 COPY ./package.json /home/app/webapp/package.json
 WORKDIR /home/app/webapp
-RUN npm install -g node-gyp && npm install
+RUN npm install -g node-gyp pm2 && npm install
 RUN mkdir /etc/service/app
 ADD ./app.sh /etc/service/app/run
 RUN chmod +x /etc/my_init.d/bootstrap.sh && chmod +x /etc/service/app/run
@@ -25,5 +25,8 @@ RUN chmod +x /etc/my_init.d/bootstrap.sh && chmod +x /etc/service/app/run
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && apt-get autoremove --purge --yes build-essential git
 
+ENV APP_NAME apicloud
+ENV APP app.js
+VOLUME ["/home/app/webapp"]
 # Use baseimage-docker's init process.
 CMD ["/sbin/my_init"]
