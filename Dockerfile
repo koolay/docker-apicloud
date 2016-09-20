@@ -11,7 +11,7 @@ ENV HOME /root
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends build-essential nodejs
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends build-essential nodejs git
 
 ADD ./bootstrap.sh /etc/my_init.d/
 COPY ./package.json /home/app/webapp/package.json
@@ -22,7 +22,7 @@ ADD ./app.sh /etc/service/app/run
 RUN chmod +x /etc/my_init.d/bootstrap.sh && chmod +x /etc/service/app/run
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && apt-get autoremove --purge --yes build-essential
+    && apt-get autoremove --purge --yes build-essential git
 
 # Use baseimage-docker's init process.
 CMD ["/sbin/my_init"]
