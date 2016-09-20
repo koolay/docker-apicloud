@@ -11,7 +11,8 @@ ENV HOME /root
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends build-essential nodejs git python2.7
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends build-essential nodejs git python2.7 \
+    && ln -s /usr/bin/python2.7 /usr/local/bin/python
 
 ADD ./bootstrap.sh /etc/my_init.d/
 COPY ./package.json /home/app/webapp/package.json
