@@ -25,6 +25,8 @@ RUN chmod +x /etc/my_init.d/bootstrap.sh && chmod +x /etc/service/app/run
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && apt-get autoremove --purge --yes build-essential git
 
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ENV APP_NAME apicloud
 ENV APP app.js
 VOLUME ["/home/app/webapp"]
