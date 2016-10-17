@@ -29,7 +29,9 @@
     "rc": "1.0.1",
     "sails": "~0.12.3",
     "sails-disk": "~0.10.9",
+    "sails-hook-sentry": "^1.2.0",
     "sails-mysql": "^0.11.5",
+    "soap": "^0.16.0",
     "swig": "^1.4.2"
   },
   "scripts": {
